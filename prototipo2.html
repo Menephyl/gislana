@@ -1,0 +1,1397 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gislana Arantes | Psicóloga - Agendamento</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --violet:#8B5CF6;
+      --violet-2:#A78BFA;
+      --white:#FFFFFF;
+      --dark:#1F2937;
+      --black:#000000;
+      --bg2:#0F172A;
+
+      --glow: 0 0 14px rgba(139,92,246,.55), 0 0 26px rgba(139,92,246,.25);
+      --border: 3px solid var(--violet);
+      --radius: 14px;
+      --ls: .05em;
+
+      --font-pixel: "VT323", monospace;
+      --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font-body);
+      color: var(--white);
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(139,92,246,.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 10%, rgba(167,139,250,.14), transparent 60%),
+        linear-gradient(180deg, #050610 0%, #070819 35%, var(--bg2) 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1120px, calc(100% - 32px)); margin:0 auto; }
+
+    /* Pixel-ish utilities */
+    .pixel-border{
+      border: var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.6) inset;
+      position:relative;
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(15,23,42,.78));
+      backdrop-filter: blur(10px);
+    }
+    .glow-hover:hover{ box-shadow: var(--glow); transform: translateY(-2px); }
+    .pixel-title{
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      text-transform: uppercase;
+    }
+    .h1{ font-size:2.5rem; line-height:1; margin:0; }
+    .h2{ font-size:1.8rem; margin:0; }
+    .muted{ color: rgba(255,255,255,.78); }
+    .small{ font-size:.95rem; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      border: var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,.35);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      letter-spacing: var(--ls);
+    }
+
+    /* Header */
+    header{
+      position:fixed; top:0; left:0; right:0;
+      z-index:50;
+      transition: background .25s ease, border-color .25s ease;
+      background: rgba(0,0,0,.05);
+      border-bottom: 1px solid rgba(139,92,246,.0);
+      backdrop-filter: blur(0px);
+    }
+    header.scrolled{
+      background: rgba(5,6,16,.72);
+      border-bottom: 1px solid rgba(139,92,246,.35);
+      backdrop-filter: blur(10px);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height:72px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      font-size: 1.6rem;
+    }
+    nav ul{
+      display:flex; list-style:none; padding:0; margin:0;
+      gap:18px; align-items:center;
+    }
+    .navlink{
+      padding:10px 10px; border-radius:10px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      letter-spacing: var(--ls);
+    }
+    .navlink:hover{ background: rgba(139,92,246,.12); box-shadow: var(--glow); transform: translateY(-1px); }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border: var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      text-transform: uppercase;
+      background: rgba(139,92,246,.12);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ box-shadow: var(--glow); transform: translateY(-2px); background: rgba(139,92,246,.18); }
+    .btn:active{ transform: translateY(0px) scale(.98); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(139,92,246,.35), rgba(139,92,246,.12));
+    }
+    .btn[disabled]{ opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+    .btn.ghost{ background: rgba(0,0,0,.25); }
+
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border: var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      cursor:pointer;
+    }
+    .hamburger span{
+      display:block; width:18px; height:2px; background: var(--white);
+      margin: 0 auto;
+      position:relative;
+    }
+    .hamburger span::before,.hamburger span::after{
+      content:""; position:absolute; left:0; right:0;
+      height:2px; background: var(--white);
+    }
+    .hamburger span::before{ top:-6px; }
+    .hamburger span::after{ top:6px; }
+
+    .mobile-menu{
+      display:none;
+      padding: 12px 0 18px;
+      border-top: 1px solid rgba(139,92,246,.25);
+    }
+    .mobile-menu a{ display:block; padding:12px 8px; border-radius:12px; }
+    .mobile-menu a:hover{ background: rgba(139,92,246,.12); }
+
+    /* Hero */
+    .hero{
+      min-height: 100vh;
+      padding-top: 96px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* pixel pattern overlay */
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 26px 26px;
+      opacity:.10;
+      transform: translateZ(0);
+      animation: drift 9s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes drift{
+      from{ background-position: 0 0, 0 0; }
+      to{ background-position: 120px 60px, 120px 60px; }
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+    .hero-card{
+      padding: 22px;
+    }
+    .hero h1{ margin: 10px 0 12px; }
+    .hero .subtitle{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      margin-bottom: 12px;
+    }
+    .hero .desc{ margin: 0 0 14px; color: rgba(255,255,255,.85); }
+    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; }
+
+    .avatar{
+      padding: 18px;
+      display:grid;
+      place-items:center;
+      min-height: 360px;
+      position:relative;
+    }
+    .avatar-box{
+      width: min(360px, 100%);
+      aspect-ratio: 1/1;
+      border: var(--border);
+      border-radius: 18px;
+      background:
+        radial-gradient(240px 240px at 50% 30%, rgba(167,139,250,.35), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(15,23,42,.85));
+      box-shadow: var(--glow);
+      position:relative;
+      overflow:hidden;
+      animation: portalIn .55s ease-out both;
+    }
+    @keyframes portalIn{
+      from{ opacity:0; transform: scale(.92) translateY(10px); }
+      to{ opacity:1; transform: scale(1) translateY(0); }
+    }
+
+    /* fake pixel avatar using CSS blocks */
+    .pixel-avatar{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      filter: drop-shadow(0 0 16px rgba(139,92,246,.45));
+      animation: float 3.2s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+    .pixel{
+      width: 220px; height: 220px;
+      image-rendering: pixelated;
+      background:
+        /* hair */
+        linear-gradient(#2a154e 0 0) 70px 36px/80px 18px no-repeat,
+        linear-gradient(#2a154e 0 0) 54px 52px/112px 18px no-repeat,
+        linear-gradient(#2a154e 0 0) 46px 70px/128px 22px no-repeat,
+        /* face */
+        linear-gradient(#f2c6a0 0 0) 66px 88px/88px 78px no-repeat,
+        /* eyes */
+        linear-gradient(#111827 0 0) 86px 116px/12px 12px no-repeat,
+        linear-gradient(#111827 0 0) 122px 116px/12px 12px no-repeat,
+        /* mouth */
+        linear-gradient(#ef4444 0 0) 104px 142px/20px 6px no-repeat,
+        /* shirt */
+        linear-gradient(#8B5CF6 0 0) 52px 166px/116px 44px no-repeat,
+        linear-gradient(#A78BFA 0 0) 52px 166px/22px 44px no-repeat,
+        /* outline blocks */
+        linear-gradient(rgba(255,255,255,.10) 0 0) 0 0/100% 100% no-repeat;
+      border-radius: 12px;
+      transform: scale(1.05);
+    }
+
+    /* Sections */
+    section{ padding: 72px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom: 18px;
+    }
+    .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    /* Stats */
+    .stats-card{ padding: 18px; }
+    .bars{ display:grid; gap: 12px; margin-top: 12px; }
+    .bar{
+      display:grid; gap: 6px;
+      font-family: var(--font-body);
+    }
+    .bar-top{ display:flex; justify-content:space-between; gap:10px; font-size:.95rem; }
+    .track{
+      height: 14px;
+      border: var(--border);
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      overflow:hidden;
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+    }
+    .fill{
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--violet), var(--violet-2));
+      box-shadow: var(--glow);
+      border-right: 2px solid rgba(255,255,255,.35);
+      transition: width 1.5s ease-out;
+    }
+    .kpis{ display:flex; gap:14px; flex-wrap:wrap; margin-top: 14px; }
+    .kpi{
+      padding: 10px 12px;
+      border: var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      min-width: 220px;
+    }
+    .kpi strong{
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      font-size: 1.3rem;
+      display:block;
+      margin-top:6px;
+    }
+
+    /* Quests */
+    .quest{ padding: 16px; transition: transform .2s ease, box-shadow .2s ease; }
+    .quest:hover{ transform: scale(1.03); box-shadow: var(--glow); }
+    .quest h3{
+      margin: 0 0 10px;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+    .quest ul{ margin:0; padding-left: 18px; color: rgba(255,255,255,.86); }
+    .quest .icon{ display:inline-block; transform: translateY(1px); margin-right: 6px; }
+
+    /* Instagram */
+    .carousel{
+      position:relative;
+      padding: 16px;
+    }
+    .carousel-top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px; margin-bottom: 12px;
+    }
+    .carousel-viewport{
+      overflow:hidden;
+      border-radius: 14px;
+    }
+    .carousel-track{
+      display:flex;
+      transition: transform .6s ease;
+      will-change: transform;
+    }
+    .post{
+      flex: 0 0 33.3333%;
+      padding: 10px;
+    }
+    .post-card{
+      height:100%;
+      padding: 12px;
+    }
+    .thumb{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border: var(--border);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(139,92,246,.25), rgba(0,0,0,.25));
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      display:grid; place-items:center;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      color: rgba(255,255,255,.85);
+      overflow:hidden;
+      position:relative;
+    }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .post-meta{ margin-top: 10px; display:grid; gap:8px; }
+    .post-meta p{ margin:0; color: rgba(255,255,255,.85); }
+    .post-meta .row{ display:flex; justify-content:space-between; gap:10px; }
+    .arcade-btns{ display:flex; gap:10px; }
+
+    /* Community */
+    .community{ padding: 18px; background: linear-gradient(180deg, rgba(139,92,246,.18), rgba(0,0,0,.35)); }
+    .community ul{ margin: 10px 0 0; padding-left: 18px; color: rgba(255,255,255,.86); }
+
+    /* Modals */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.66);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 100;
+    }
+    .modal-backdrop.open{ display:flex; }
+    .modal{
+      width: min(860px, 100%);
+      max-height: min(86vh, 860px);
+      overflow:auto;
+      padding: 16px;
+      transform: scale(.92);
+      opacity: 0;
+      animation: modalIn .35s ease-out forwards;
+    }
+    @keyframes modalIn{
+      to{ transform: scale(1); opacity: 1; }
+    }
+    .modal-header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px; padding: 6px 6px 10px;
+      border-bottom: 1px solid rgba(139,92,246,.25);
+      margin-bottom: 12px;
+    }
+    .modal-title{
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      margin:0;
+    }
+    .xbtn{
+      width:44px; height:44px;
+      border: var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      cursor:pointer;
+      color: var(--white);
+      font-family: var(--font-pixel);
+      font-size: 1.4rem;
+    }
+    .xbtn:hover{ box-shadow: var(--glow); }
+
+    .modal-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .panel{ padding: 14px; }
+    .panel h3{
+      margin:0 0 10px;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+    .hint{ color: rgba(255,255,255,.78); margin:0 0 10px; }
+
+    .calendar-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px; margin-bottom: 10px;
+      flex-wrap:wrap;
+    }
+    .month-label{
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      font-size: 1.3rem;
+    }
+    .calendar-grid{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .dow{
+      text-align:center;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      color: rgba(255,255,255,.75);
+      font-size: 1.05rem;
+    }
+    .calendar-day, .time-slot{
+      border: var(--border);
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: rgba(0,0,0,.28);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease, filter .2s ease;
+      text-align:center;
+      font-family: var(--font-pixel);
+      letter-spacing: var(--ls);
+      user-select:none;
+    }
+    .calendar-day.available{ background: rgba(139,92,246,.18); }
+    .calendar-day.unavailable{ opacity:.5; cursor:not-allowed; background: rgba(75,85,99,.24); }
+    .calendar-day.available:hover{ box-shadow: var(--glow); transform: scale(1.03); }
+
+    .selected{
+      background: rgba(167,139,250,.32) !important;
+      border-color: var(--white) !important;
+      box-shadow: var(--glow) !important;
+    }
+
+    .times-grid{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .time-slot.free:hover{ box-shadow: var(--glow); transform: scale(1.03); }
+    .time-slot.booked{
+      opacity:.45; cursor:not-allowed;
+      filter: grayscale(100%);
+      background: rgba(75,85,99,.22);
+    }
+
+    .modal-actions{
+      display:flex; justify-content:flex-end; gap: 10px; margin-top: 12px; flex-wrap:wrap;
+    }
+
+    /* Form */
+    .form{ display:grid; gap: 12px; }
+    label{ display:grid; gap: 6px; font-size: .95rem; color: rgba(255,255,255,.85); }
+    input, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border: var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      color: var(--white);
+      outline:none;
+      font-family: var(--font-body);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset;
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus{ box-shadow: var(--glow); }
+    .valid{ border-color: #10B981 !important; }
+    .invalid{ border-color: #EF4444 !important; }
+
+    .char-row{ display:flex; justify-content:space-between; gap: 10px; }
+    .char-count{ color: rgba(255,255,255,.7); font-size:.9rem; }
+
+    /* Reveal animations */
+    .reveal{ opacity:0; transform: translateY(10px); }
+    .reveal.show{ opacity:1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+
+    /* Footer spacing */
+    footer{ padding: 34px 0 60px; color: rgba(255,255,255,.7); }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .modal-grid{ grid-template-columns: 1fr; }
+      .post{ flex-basis: 50%; }
+    }
+    @media (max-width: 720px){
+      nav ul, .nav .btn.primary{ display:none; }
+      .hamburger{ display:block; }
+      .mobile-menu.open{ display:block; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .post{ flex-basis: 100%; }
+      .times-grid{ grid-template-columns: repeat(3, 1fr); }
+      .h1{ font-size:2.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">Gislana Arantes</a>
+
+        <nav aria-label="Navegação principal">
+          <ul>
+            <li><a class="navlink" href="#sobre">Sobre</a></li>
+            <li><a class="navlink" href="#especialidades">Especialidades</a></li>
+            <li><a class="navlink" href="#comunidade">Comunidade</a></li>
+            <li><a class="navlink" href="https://www.instagram.com/psicologalana/" target="_blank" rel="noreferrer">Instagram</a></li>
+          </ul>
+        </nav>
+
+        <button class="btn primary" id="openSchedulerTop">AGENDAR SESSÃO</button>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+          <span></span>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#sobre">Sobre</a>
+        <a href="#especialidades">Especialidades</a>
+        <a href="#comunidade">Comunidade</a>
+        <a href="https://www.instagram.com/psicologalana/" target="_blank" rel="noreferrer">Instagram</a>
+        <div style="padding:10px 8px;">
+          <button class="btn primary" id="openSchedulerMobile" style="width:100%;">AGENDAR SESSÃO</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card pixel-border reveal">
+          <div class="chip pixel-title">🟣 ESPAÇO SEGURO PARA SE CUIDAR 🟣</div>
+          <h1 class="pixel-title h1">Terapia online com acolhimento real</h1>
+
+          <div class="subtitle">
+            <span class="chip">Psicóloga | CRP-04/71925</span>
+            <span class="chip">TCC: Ansiedade & Autoestima</span>
+          </div>
+
+          <p class="desc">
+            “Um espaço seguro para se escutar e se cuidar”. Vamos construir estratégias práticas,
+            com gentileza e consistência, no seu ritmo.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn primary" id="openSchedulerHero">▶️ INICIAR JORNADA DE CURA</button>
+            <a class="btn ghost" href="https://chat.whatsapp.com/J62EZoLZJCvLWBfdFCeDbL" target="_blank" rel="noreferrer">🎮 Comunidade Geek</a>
+          </div>
+
+          <p class="muted small" style="margin-top:12px;">
+            Atendimento online • Sigilo • Ética profissional
+          </p>
+        </div>
+
+        <div class="avatar pixel-border reveal">
+          <div class="avatar-box">
+            <div class="pixel-avatar" title="Avatar pixel art (placeholder)">
+              <div class="pixel"></div>
+            </div>
+          </div>
+          <p class="muted small" style="margin:12px 0 0; text-align:center;">
+            (Avatar pixel art placeholder — posso trocar por imagem real depois)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="sobre">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2 class="pixel-title h2">📊 STATUS DE HABILIDADE 📊</h2>
+            <p class="muted">Indicadores no estilo RPG (anima ao aparecer na tela).</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="stats-card pixel-border reveal">
+            <div class="bars" id="bars">
+              <div class="bar" data-value="85">
+                <div class="bar-top"><span>Experiência em Terapia</span><span>85%</span></div>
+                <div class="track"><div class="fill"></div></div>
+              </div>
+              <div class="bar" data-value="100">
+                <div class="bar-top"><span>Empatia & Acolhimento</span><span>100%</span></div>
+                <div class="track"><div class="fill"></div></div>
+              </div>
+              <div class="bar" data-value="90">
+                <div class="bar-top"><span>Especialização TCC</span><span>90%</span></div>
+                <div class="track"><div class="fill"></div></div>
+              </div>
+              <div class="bar" data-value="100">
+                <div class="bar-top"><span>Atendimento Online</span><span>100%</span></div>
+                <div class="track"><div class="fill"></div></div>
+              </div>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi">
+                <div class="muted small">💚 Clientes Transformados</div>
+                <strong><span class="counter" data-target="247">0</span>+</strong>
+              </div>
+              <div class="kpi">
+                <div class="muted small">⭐ Avaliação Média</div>
+                <strong><span class="counter" data-target="4.9" data-decimals="1">0</span>/5</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="pixel-border reveal" style="padding:18px;">
+            <h3 class="pixel-title" style="margin:0 0 10px; font-size:1.4rem;">📌 Sobre a jornada</h3>
+            <p class="muted" style="margin:0 0 10px;">
+              Terapia não é “consertar” você — é construir clareza, repertório emocional e escolhas mais alinhadas.
+            </p>
+            <p class="muted" style="margin:0 0 14px;">
+              Na TCC, trabalhamos com pensamentos, emoções e comportamentos de forma estruturada e prática.
+            </p>
+            <button class="btn primary" id="openSchedulerSobre">AGENDAR SESSÃO</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTS -->
+    <section id="especialidades">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2 class="pixel-title h2">🎯 MISSÕES DISPONÍVEIS</h2>
+            <p class="muted">Três quests principais (cards com hover glow).</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="quest pixel-border reveal">
+            <h3><span class="icon">⚔️</span>Derrote a ansiedade</h3>
+            <ul>
+              <li>Técnicas comprovadas de TCC</li>
+              <li>Respiração e mindfulness</li>
+              <li>Reforço comportamental</li>
+            </ul>
+          </div>
+
+          <div class="quest pixel-border reveal">
+            <h3><span class="icon">💪</span>Fortaleça sua estima</h3>
+            <ul>
+              <li>Autoconhecimento profundo</li>
+              <li>Reconhecer potenciais</li>
+              <li>Construir autoconfiança</li>
+            </ul>
+          </div>
+
+          <div class="quest pixel-border reveal">
+            <h3><span class="icon">🛡️</span>Crie defesas mentais</h3>
+            <ul>
+              <li>Estratégias de resiliência</li>
+              <li>Manejo de emoções</li>
+              <li>Habilidades sociais</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM (mock) -->
+    <section id="instagram">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2 class="pixel-title h2">📸 DICAS & INSPIRAÇÃO</h2>
+            <p class="muted">Carrossel com posts (mock JSON). Posso integrar depois via API/serviço.</p>
+          </div>
+          <div class="arcade-btns">
+            <button class="btn" id="prevPost">◄</button>
+            <button class="btn" id="nextPost">►</button>
+          </div>
+        </div>
+
+        <div class="carousel pixel-border reveal">
+          <div class="carousel-top">
+            <div class="muted small">Rotação automática a cada 5s</div>
+            <a class="btn ghost" href="https://www.instagram.com/psicologalana/" target="_blank" rel="noreferrer">Ver Instagram</a>
+          </div>
+
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="comunidade">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2 class="pixel-title h2">🎮 COMUNIDADE GEEK NO WHATSAPP</h2>
+            <p class="muted">Easter egg leve: amizades, papo geek e apoio saudável — sem pressão.</p>
+          </div>
+        </div>
+
+        <div class="community pixel-border reveal">
+          <p class="muted" style="margin:0 0 10px;">
+            “Anime, games, séries, RPG, tecnologia e conversas legais.”
+          </p>
+          <p class="muted" style="margin:0 0 10px;">
+            💜 Um espaço leve pra fazer amizades, SEM PRESSÃO.
+          </p>
+          <div class="grid-2" style="margin-top:10px;">
+            <div>
+              <div class="pixel-title" style="font-size:1.2rem;">Tópicos</div>
+              <ul>
+                <li>Discussões sobre anime/games</li>
+                <li>Dicas de tecnologia</li>
+                <li>Apoio comunitário saudável</li>
+              </ul>
+            </div>
+            <div style="display:grid; gap:10px; align-content:start;">
+              <a class="btn primary" target="_blank" rel="noreferrer"
+                 href="https://chat.whatsapp.com/J62EZoLZJCvLWBfdFCeDbL">▶️ ENTRAR NA COMUNIDADE</a>
+              <button class="btn ghost" id="openSchedulerCommunity">AGENDAR SESSÃO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="pixel-border" style="padding:16px;">
+          <div class="muted small">
+            © <span id="year"></span> • Psicóloga Gislana Arantes • CRP-04/71925 • Terapia Online
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- MODAL 1: DATE/TIME -->
+  <div class="modal-backdrop" id="modal1Backdrop" role="dialog" aria-modal="true" aria-label="Agendar sua sessão">
+    <div class="modal pixel-border">
+      <div class="modal-header">
+        <h3 class="modal-title">📅 AGENDE SUA SESSÃO 📅</h3>
+        <button class="xbtn" id="closeModal1" aria-label="Fechar">X</button>
+      </div>
+
+      <div class="modal-grid">
+        <div class="panel pixel-border" style="background:rgba(0,0,0,.18);">
+          <h3>Escolha uma data</h3>
+          <p class="hint">Mostrando próximos 30 dias • apenas SEG–SEX • sem datas passadas</p>
+
+          <div class="calendar-head">
+            <div class="month-label" id="monthLabel">—</div>
+            <button class="btn ghost" id="resetSelection">Limpar seleção</button>
+          </div>
+
+          <div class="calendar-grid" style="margin-bottom:8px;">
+            <div class="dow">SEM</div><div class="dow">SEG</div><div class="dow">TER</div>
+            <div class="dow">QUA</div><div class="dow">QUI</div><div class="dow">SEX</div><div class="dow">DOM</div>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div class="panel pixel-border" style="background:rgba(0,0,0,.18);">
+          <h3>Horários disponíveis</h3>
+          <p class="hint">Slots de 1h • 08:00–18:00 • bloqueia ocupados</p>
+
+          <div class="times-grid" id="timesGrid"></div>
+
+          <div class="modal-actions">
+            <button class="btn primary" id="nextToForm" disabled>▶️ PRÓXIMO: PREENCHER DADOS</button>
+          </div>
+
+          <div class="muted small" style="margin-top:10px;">
+            Selecionado: <span id="selectedSummary">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: FORM -->
+  <div class="modal-backdrop" id="modal2Backdrop" role="dialog" aria-modal="true" aria-label="Dados do agendamento">
+    <div class="modal pixel-border">
+      <div class="modal-header">
+        <h3 class="modal-title">🎭 CONTE SOBRE VOCÊ 🎭</h3>
+        <button class="xbtn" id="closeModal2" aria-label="Fechar">X</button>
+      </div>
+
+      <div class="panel pixel-border" style="background:rgba(0,0,0,.18);">
+        <p class="hint" style="margin-top:0;">
+          Data/hora escolhidas: <strong id="chosenDT">—</strong>
+        </p>
+
+        <form class="form" id="leadForm">
+          <label>
+            Nome Completo:
+            <input type="text" id="name" placeholder="Seu nome" minlength="3" maxlength="100" required />
+          </label>
+
+          <label>
+            Email:
+            <input type="email" id="email" placeholder="voce@exemplo.com" required />
+          </label>
+
+          <label>
+            WhatsApp (com DDD):
+            <input type="tel" id="whatsapp" placeholder="(31) 99999-9999" inputmode="numeric" required />
+          </label>
+
+          <label>
+            O que você gostaria de trabalhar:
+            <div class="char-row">
+              <span class="muted small">Descreva seus desafios/objetivos</span>
+              <span class="char-count" id="charCount">0/500</span>
+            </div>
+            <textarea id="about" minlength="10" maxlength="500" placeholder="Ex.: ansiedade em situações sociais, autoestima, autocobrança..." required></textarea>
+          </label>
+
+          <div class="modal-actions">
+            <button class="btn ghost" type="button" id="backToCalendar">◄ VOLTAR</button>
+            <button class="btn primary" type="submit" id="confirmPay" disabled>▶️ CONFIRMAR E PAGAR (R$ 50)</button>
+          </div>
+
+          <p class="muted small" style="margin:0;">
+            Obs.: Pagamento aqui é demonstração. Posso integrar com Stripe/Mercado Pago/Checkout e confirmar o slot.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------------------------
+    // Helpers
+    // ---------------------------
+    const pad2 = (n) => String(n).padStart(2,'0');
+
+    function formatBR(dateObj){
+      const d = pad2(dateObj.getDate());
+      const m = pad2(dateObj.getMonth()+1);
+      const y = dateObj.getFullYear();
+      return `${d}/${m}/${y}`;
+    }
+
+    function toISODate(dateObj){
+      return `${dateObj.getFullYear()}-${pad2(dateObj.getMonth()+1)}-${pad2(dateObj.getDate())}`;
+    }
+
+    function monthYearLabel(dateObj){
+      return dateObj.toLocaleDateString('pt-BR', { month:'long', year:'numeric' });
+    }
+
+    function isWeekday(dateObj){
+      const day = dateObj.getDay(); // 0 dom ... 6 sáb
+      return day >= 1 && day <= 5;
+    }
+
+    function isPastDay(dateObj){
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const d = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+      return d < today;
+    }
+
+    // ---------------------------
+    // State
+    // ---------------------------
+    const state = {
+      selectedDate: null,   // YYYY-MM-DD
+      selectedTime: null,   // "HH:00"
+      bookedSlots: [],      // {date:"YYYY-MM-DD", time:"HH:00"}
+      isNextEnabled: false
+    };
+
+    // Demo booked slots (simulando ocupados)
+    // Em produção: carregar do backend (ex.: Google Calendar, DB, etc.)
+    (function seedBooked(){
+      const base = new Date();
+      for (let i=2;i<=9;i+=3){
+        const d = new Date(base); d.setDate(base.getDate()+i);
+        if (isWeekday(d)){
+          state.bookedSlots.push({ date: toISODate(d), time: "10:00" });
+          state.bookedSlots.push({ date: toISODate(d), time: "14:00" });
+        }
+      }
+    })();
+
+    // ---------------------------
+    // Header scroll + mobile menu
+    // ---------------------------
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=> mobileMenu.classList.remove('open')));
+
+    // ---------------------------
+    // Reveal on scroll
+    // ---------------------------
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ---------------------------
+    // Stats animation (bars + counters)
+    // ---------------------------
+    const barsRoot = document.getElementById('bars');
+    let statsPlayed = false;
+
+    const statsIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting && !statsPlayed){
+          statsPlayed = true;
+          document.querySelectorAll('.bar').forEach(bar=>{
+            const v = bar.getAttribute('data-value');
+            bar.querySelector('.fill').style.width = `${v}%`;
+          });
+          animateCounters();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    statsIO.observe(barsRoot);
+
+    function animateCounters(){
+      document.querySelectorAll('.counter').forEach(el=>{
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals || "0", 10);
+        const duration = 2000;
+        const start = performance.now();
+
+        function tick(t){
+          const p = Math.min((t - start)/duration, 1);
+          const value = target * (0.08 + 0.92*p); // leve easing
+          el.textContent = value.toFixed(decimals);
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target.toFixed(decimals);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    // ---------------------------
+    // Instagram carousel (mock)
+    // ---------------------------
+    const posts = [
+      { title:"Ansiedade: 3 passos práticos", caption:"Pequenas ações diárias para reduzir a ansiedade.", likes: 214, url:"https://www.instagram.com/psicologalana/", img:null },
+      { title:"Autoestima e autocompaixão", caption:"Como falar consigo com mais gentileza.", likes: 301, url:"https://www.instagram.com/psicologalana/", img:null },
+      { title:"TCC na prática", caption:"Identificando pensamentos automáticos no dia a dia.", likes: 187, url:"https://www.instagram.com/psicologalana/", img:null },
+      { title:"Resiliência", caption:"Estratégias para lidar com dias difíceis.", likes: 142, url:"https://www.instagram.com/psicologalana/", img:null },
+      { title:"Mindfulness", caption:"Uma técnica simples para voltar ao presente.", likes: 265, url:"https://www.instagram.com/psicologalana/", img:null },
+    ];
+
+    const track = document.getElementById('carouselTrack');
+    function renderPosts(){
+      track.innerHTML = posts.map((p, idx)=>`
+        <div class="post">
+          <div class="post-card pixel-border glow-hover">
+            <div class="thumb">
+              ${p.img ? `<img src="${p.img}" alt="${p.title}"/>` : `<div>${p.title}</div>`}
+            </div>
+            <div class="post-meta">
+              <p class="small muted">${p.caption.slice(0,100)}</p>
+              <div class="row">
+                <span class="small">💜 ${p.likes}</span>
+                <a class="small" href="${p.url}" target="_blank" rel="noreferrer">Ver no Instagram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    renderPosts();
+
+    let slideIndex = 0;
+    function slidesPerView(){
+      if (window.innerWidth <= 720) return 1;
+      if (window.innerWidth <= 980) return 2;
+      return 3;
+    }
+    function maxIndex(){
+      return Math.max(0, posts.length - slidesPerView());
+    }
+    function updateCarousel(){
+      const spv = slidesPerView();
+      const pct = 100 / spv;
+      track.style.transform = `translateX(-${slideIndex * pct}%)`;
+    }
+
+    document.getElementById('prevPost').addEventListener('click', ()=>{
+      slideIndex = Math.max(0, slideIndex - 1);
+      updateCarousel();
+    });
+    document.getElementById('nextPost').addEventListener('click', ()=>{
+      slideIndex = Math.min(maxIndex(), slideIndex + 1);
+      updateCarousel();
+    });
+
+    let auto = setInterval(()=>{
+      slideIndex = (slideIndex >= maxIndex()) ? 0 : slideIndex + 1;
+      updateCarousel();
+    }, 5000);
+
+    window.addEventListener('resize', ()=>{
+      slideIndex = Math.min(slideIndex, maxIndex());
+      updateCarousel();
+    });
+
+    // ---------------------------
+    // Scheduler modals
+    // ---------------------------
+    const modal1 = document.getElementById('modal1Backdrop');
+    const modal2 = document.getElementById('modal2Backdrop');
+
+    const openButtons = [
+      'openSchedulerTop','openSchedulerHero','openSchedulerMobile','openSchedulerSobre','openSchedulerCommunity'
+    ].map(id => document.getElementById(id)).filter(Boolean);
+
+    openButtons.forEach(btn => btn.addEventListener('click', openModal1));
+
+    document.getElementById('closeModal1').addEventListener('click', closeModal1);
+    document.getElementById('closeModal2').addEventListener('click', closeModal2);
+
+    modal1.addEventListener('click', (e)=>{ if(e.target === modal1) closeModal1(); });
+    modal2.addEventListener('click', (e)=>{ if(e.target === modal2) closeModal2(); });
+
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        if(modal2.classList.contains('open')) closeModal2();
+        else if(modal1.classList.contains('open')) closeModal1();
+      }
+    });
+
+    const calendarGrid = document.getElementById('calendarGrid');
+    const timesGrid = document.getElementById('timesGrid');
+    const monthLabelEl = document.getElementById('monthLabel');
+
+    const nextBtn = document.getElementById('nextToForm');
+    const summaryEl = document.getElementById('selectedSummary');
+    const chosenDT = document.getElementById('chosenDT');
+
+    const resetSelectionBtn = document.getElementById('resetSelection');
+
+    function openModal1(){
+      modal1.classList.add('open');
+      buildCalendar();
+      buildTimes();
+      updateNextEnabled();
+      updateSummary();
+    }
+    function closeModal1(){
+      modal1.classList.remove('open');
+    }
+    function openModal2(){
+      modal2.classList.add('open');
+      chosenDT.textContent = summaryEl.textContent;
+      validateForm(); // set button state
+    }
+    function closeModal2(){
+      modal2.classList.remove('open');
+    }
+
+    // Calendar: próximos 30 dias, seg-sex, não passado
+    function buildCalendar(){
+      calendarGrid.innerHTML = '';
+      const now = new Date();
+      const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      monthLabelEl.textContent = monthYearLabel(base);
+
+      // We will render 30 day buttons, aligned in a 7-col grid with initial padding based on DOW,
+      // using SEM as first (Sunday=0). We'll treat grid columns: SEM(0) SEG(1)... DOM(6)
+      const startDow = base.getDay();
+      for (let i=0; i<startDow; i++){
+        const spacer = document.createElement('div');
+        spacer.style.opacity = '0';
+        calendarGrid.appendChild(spacer);
+      }
+
+      for (let i=0;i<30;i++){
+        const d = new Date(base);
+        d.setDate(base.getDate()+i);
+
+        const iso = toISODate(d);
+        const btn = document.createElement('button');
+        btn.className = 'calendar-day';
+        btn.type = 'button';
+        btn.dataset.date = iso;
+        btn.textContent = d.getDate();
+
+        const available = isWeekday(d) && !isPastDay(d);
+        btn.classList.add(available ? 'available' : 'unavailable');
+
+        if (state.selectedDate === iso) btn.classList.add('selected');
+
+        btn.addEventListener('click', ()=>{
+          if (!available) return;
+
+          // select unique date
+          state.selectedDate = iso;
+          state.selectedTime = null; // reset time when date changes
+          // rerender day selection visuals
+          calendarGrid.querySelectorAll('.calendar-day').forEach(x=>x.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          buildTimes();
+          updateNextEnabled();
+          updateSummary();
+        });
+
+        calendarGrid.appendChild(btn);
+      }
+    }
+
+    // Times: 08:00-18:00
+    function buildTimes(){
+      timesGrid.innerHTML = '';
+      const hours = [];
+      for(let h=8; h<=18; h++) hours.push(`${pad2(h)}:00`);
+
+      hours.forEach(time=>{
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'time-slot';
+        btn.dataset.time = time;
+        btn.textContent = time.replace(':00','h');
+
+        const canPickDate = !!state.selectedDate;
+        const isBooked = state.bookedSlots.some(s => s.date === state.selectedDate && s.time === time);
+
+        if (!canPickDate){
+          btn.classList.add('booked');
+          btn.style.opacity = '.35';
+          btn.style.cursor = 'not-allowed';
+          btn.title = 'Selecione uma data primeiro';
+        } else if (isBooked){
+          btn.classList.add('booked');
+          btn.title = 'Horário ocupado';
+        } else {
+          btn.classList.add('free');
+        }
+
+        if (state.selectedTime === time) btn.classList.add('selected');
+
+        btn.addEventListener('click', ()=>{
+          if (!state.selectedDate) return;
+          if (isBooked) return;
+
+          state.selectedTime = time;
+          timesGrid.querySelectorAll('.time-slot').forEach(x=>x.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          updateNextEnabled();
+          updateSummary();
+        });
+
+        timesGrid.appendChild(btn);
+      });
+    }
+
+    function updateNextEnabled(){
+      state.isNextEnabled = !!(state.selectedDate && state.selectedTime);
+      nextBtn.disabled = !state.isNextEnabled;
+      if (state.isNextEnabled) nextBtn.style.boxShadow = 'var(--glow)';
+      else nextBtn.style.boxShadow = 'none';
+    }
+
+    function updateSummary(){
+      if (!state.selectedDate || !state.selectedTime){
+        summaryEl.textContent = '—';
+        return;
+      }
+      // convert selectedDate to BR format
+      const [y,m,d] = state.selectedDate.split('-').map(Number);
+      const dateObj = new Date(y, m-1, d);
+      summaryEl.textContent = `${formatBR(dateObj)} às ${state.selectedTime}`;
+    }
+
+    resetSelectionBtn.addEventListener('click', ()=>{
+      state.selectedDate = null;
+      state.selectedTime = null;
+      buildCalendar();
+      buildTimes();
+      updateNextEnabled();
+      updateSummary();
+    });
+
+    nextBtn.addEventListener('click', ()=>{
+      if (!state.isNextEnabled) return;
+      closeModal1();
+      openModal2();
+    });
+
+    document.getElementById('backToCalendar').addEventListener('click', ()=>{
+      closeModal2();
+      openModal1();
+    });
+
+    // ---------------------------
+    // Form validations + mask
+    // ---------------------------
+    const form = document.getElementById('leadForm');
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const waEl = document.getElementById('whatsapp');
+    const aboutEl = document.getElementById('about');
+    const charCount = document.getElementById('charCount');
+    const confirmPay = document.getElementById('confirmPay');
+
+    function setValidity(el, ok){
+      el.classList.toggle('valid', ok);
+      el.classList.toggle('invalid', !ok);
+    }
+
+    function validateName(){
+      const v = nameEl.value.trim();
+      const ok = v.length >= 3 && v.length <= 100;
+      setValidity(nameEl, ok);
+      return ok;
+    }
+
+    function validateEmail(){
+      const v = emailEl.value.trim();
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      const ok = re.test(v);
+      setValidity(emailEl, ok);
+      return ok;
+    }
+
+    function digitsOnly(s){ return (s || '').replace(/\D/g,''); }
+
+    function formatBRPhone(raw){
+      const d = digitsOnly(raw).slice(0,11);
+      const ddd = d.slice(0,2);
+      const part1 = d.slice(2,7);
+      const part2 = d.slice(7,11);
+      if (d.length <= 2) return d.length ? `(${ddd}` : '';
+      if (d.length <= 7) return `(${ddd}) ${d.slice(2)}`;
+      return `(${ddd}) ${part1}-${part2}`;
+    }
+
+    function validateWhatsApp(){
+      const d = digitsOnly(waEl.value);
+      const ok = d.length === 11;
+      setValidity(waEl, ok);
+      return ok;
+    }
+
+    function validateAbout(){
+      const v = aboutEl.value.trim();
+      const ok = v.length >= 10 && v.length <= 500;
+      setValidity(aboutEl, ok);
+      charCount.textContent = `${aboutEl.value.length}/500`;
+      return ok;
+    }
+
+    function validateForm(){
+      const ok = validateName() & validateEmail() & validateWhatsApp() & validateAbout();
+      confirmPay.disabled = !ok;
+      return !!ok;
+    }
+
+    [nameEl,emailEl,waEl,aboutEl].forEach(el=>{
+      el.addEventListener('input', validateForm);
+      el.addEventListener('blur', validateForm);
+    });
+
+    waEl.addEventListener('input', ()=>{
+      const caret = waEl.selectionStart;
+      waEl.value = formatBRPhone(waEl.value);
+      try { waEl.setSelectionRange(caret, caret); } catch {}
+    });
+
+    aboutEl.addEventListener('input', ()=> {
+      charCount.textContent = `${aboutEl.value.length}/500`;
+    });
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!validateForm()) return;
+
+      // Here you'd send to backend + payment + booking.
+      // Demo: mark slot as booked locally and show an alert.
+      state.bookedSlots.push({ date: state.selectedDate, time: state.selectedTime });
+
+      const payload = {
+        date: state.selectedDate,
+        time: state.selectedTime,
+        name: nameEl.value.trim(),
+        email: emailEl.value.trim(),
+        whatsapp: digitsOnly(waEl.value),
+        about: aboutEl.value.trim()
+      };
+
+      console.log("AGENDAMENTO (demo):", payload);
+
+      alert("Agendamento (demo) confirmado! Agora eu posso integrar com pagamento e envio automático via WhatsApp/email.");
+
+      // reset
+      closeModal2();
+      state.selectedDate = null;
+      state.selectedTime = null;
+      nameEl.value = '';
+      emailEl.value = '';
+      waEl.value = '';
+      aboutEl.value = '';
+      charCount.textContent = `0/500`;
+      confirmPay.disabled = true;
+      buildCalendar();
+      buildTimes();
+      updateSummary();
+      updateNextEnabled();
+    });
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

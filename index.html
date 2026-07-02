@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gislana | Psicóloga</title>
+    <link rel="shortcut icon" href="./assets/logo.jpeg" type="image/png" style="width: fit-content; ;">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/hero.css">
+    <link rel="stylesheet" href="styles/stats.css">
+    <link rel="stylesheet" href="styles/especialidades.css">
+    <link rel="stylesheet" href="styles/instagram.css">
+    <link rel="stylesheet" href="styles/comunidade.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+
+<body>
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <h2 class="logo-text">🟣 GISLANA</h2>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#sobre" class="nav-link">SOBRE</a>
+                <a href="#especialidades" class="nav-link">ESPECIALIDADES</a>
+                <a href="#comunidade" class="nav-link">COMUNIDADE</a>
+                <a href="#instagram" class="nav-link">INSTAGRAM</a>
+            </nav>
+            <button class="cta-button nav-cta" id="openScheduleBtn">AGENDAR SESSÃO</button>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="pixel-pattern"></div>
+            <div class="hero-glow"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <div class="avatar-frame">
+                    <img src="./assets/avatar/gislana-avatar.png" alt="Gislana Arantes" class="avatar-img">
+                </div>
+            </div>
+            <h1 class="hero-title">
+                🟣 ESPAÇO SEGURO<br>
+                PARA SE CUIDAR 🟣
+            </h1>
+            <p class="hero-subtitle">Psicóloga | CRP-04/71925</p>
+            <p class="hero-description">
+                TCC para Ansiedade e Autoestima
+            </p>
+            <p class="hero-tagline">
+                💜 Terapia Online | Acolhimento Real
+            </p>
+            <button class="hero-cta" id="openScheduleBtn">
+                ▶️ INICIAR JORNADA DE CURA
+            </button>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="247">0</span>
+                    <span class="stat-label">+Transformações</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Avaliação</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="arrow-down"></div>
+        </div>
+    </section>
+    <!-- ==================== SEÇÃO: SOBRE MIM ==================== -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <!-- Esquerda: Imagem + Info -->
+                <div class="about-left">
+                    <div class="about-image-container">
+                        <img src="./assets/gislana-home.jpg" alt="Gislana Arantes Rosa" class="about-image">
+                        <div class="about-badge">
+                            <span class="badge-text">Psicóloga</span>
+                            <span class="badge-crp">CRP-04/71925</span>
+                        </div>
+                    </div>
+
+                    <!-- Card de Valores -->
+                    <div class="values-card">
+                        <h3 class="values-title">💜 Meus Valores</h3>
+                        <div class="values-list">
+                            <div class="value-item">
+                                <span class="value-icon">🎯</span>
+                                <div class="value-text">
+                                    <h4>Escuta Atenta</h4>
+                                    <p>Seu tempo, suas emoções e suas histórias importam</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <span class="value-icon">🛡️</span>
+                                <div class="value-text">
+                                    <h4>Sigilo Total</h4>
+                                    <p>Espaço seguro e confidencial para você ser você</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <span class="value-icon">🌱</span>
+                                <div class="value-text">
+                                    <h4>Crescimento Real</h4>
+                                    <p>Transformação prática que cabe na sua vida</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <span class="value-icon">✨</span>
+                                <div class="value-text">
+                                    <h4>Sem Julgamentos</h4>
+                                    <p>Aceitação total do que você sente e pensa</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direita: Texto + Gatilhos -->
+                <div class="about-right">
+                    <div class="about-header">
+                        <h2 class="about-title">Olá, eu sou Gislana</h2>
+                        <p class="about-subtitle">Psicóloga | CRP-04/71925</p>
+                    </div>
+
+                    <!-- Introdução -->
+                    <div class="about-intro">
+                        <p class="about-text">
+                            Meu atendimento é realizado de forma <strong>100% online</strong> e tem como base a
+                            <strong>Terapia Cognitivo-Comportamental (TCC)</strong>.
+                        </p>
+                        <p class="about-text">
+                            Meu trabalho é oferecer um espaço de escuta, acolhimento e cuidado para pessoas que desejam
+                            compreender melhor seus pensamentos, emoções e comportamentos.
+                        </p>
+                    </div>
+
+                    <!-- GATILHO 1: Identificação -->
+                    <div class="trigger-box trigger-identification">
+                        <h3 class="trigger-title">🎮 Talvez você se identifique com isso:</h3>
+                        <ul class="trigger-list">
+                            <li>✓ Você segue fazendo o que precisa ser feito, mas por dentro há cansaço</li>
+                            <li>✓ Ansiedade, pensamentos acelerados e a sensação de estar sempre no limite</li>
+                            <li>✓ Autocobrança excessiva e dificuldade de se aceitar como é</li>
+                            <li>✓ Quer fugir da realidade através de séries, animes e games</li>
+                            <li>✓ Sente que ninguém entende o que você realmente sente</li>
+                            <li>✓ Procrastina ou evita situações por medo ou insegurança</li>
+                        </ul>
+                    </div>
+
+                    <!-- GATILHO 2: Validação Emocional -->
+                    <div class="trigger-box trigger-validation">
+                        <h3 class="trigger-title">💔 Você não está sozinha</h3>
+                        <p class="trigger-text">
+                            Nem sempre é fácil explicar o que está acontecendo. Às vezes, você só sente que algo não
+                            está bem.
+                            <br><br>
+                            A boa notícia? <strong>Isso tem solução.</strong> E você não precisa esperar chegar ao
+                            limite para buscar ajuda.
+                        </p>
+                    </div>
+
+                    <!-- GATILHO 3: Transformação -->
+                    <div class="trigger-box trigger-transformation">
+                        <h3 class="trigger-title">✨ O que a terapia pode fazer por você:</h3>
+                        <div class="transformation-grid">
+                            <div class="transformation-item">
+                                <span class="transformation-icon">🧠</span>
+                                <h4>Clareza Mental</h4>
+                                <p>Entender por que você sente e pensa assim</p>
+                            </div>
+                            <div class="transformation-item">
+                                <span class="transformation-icon">💪</span>
+                                <h4>Controle Emocional</h4>
+                                <p>Estratégias práticas para lidar com ansiedade</p>
+                            </div>
+                            <div class="transformation-item">
+                                <span class="transformation-icon">🎯</span>
+                                <h4>Decisões Melhores</h4>
+                                <p>Escolhas mais alinhadas com seus valores</p>
+                            </div>
+                            <div class="transformation-item">
+                                <span class="transformation-icon">🌟</span>
+                                <h4>Autoconfiança</h4>
+                                <p>Recuperar a confiança em si mesma</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GATILHO 4: Urgência + CTA -->
+                    <div class="trigger-box trigger-cta">
+                        <h3 class="trigger-title">⏰ Comece Hoje</h3>
+                        <p class="trigger-text">
+                            O primeiro passo é sempre o mais difícil. Mas você não precisa continuar carregando tudo
+                            sozinha.
+                        </p>
+                        <button class="cta-button cta-large" id="openScheduleBtn2">
+                            💜 AGENDAR AGORA - R$ 50
+                        </button>
+                        <p class="trigger-small">Consulta social para quem não tem condição financeira integral</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SEÇÃO: COMO FUNCIONA ==================== -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <h2 class="section-title">📱 Como Funciona o Atendimento</h2>
+
+            <div class="how-it-works-grid">
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">1</div>
+                    <h3>Agende Online</h3>
+                    <p>Escolha data, hora e preencha suas informações. Rápido e seguro.</p>
+                </div>
+
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">2</div>
+                    <h3>Videochamada Segura</h3>
+                    <p>Sessões de 50 minutos em um ambiente privativo e confidencial.</p>
+                </div>
+
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">3</div>
+                    <h3>Compreensão Real</h3>
+                    <p>Vamos entender sua história, seus desafios e seus objetivos.</p>
+                </div>
+
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">4</div>
+                    <h3>Mudança Prática</h3>
+                    <p>Técnicas e estratégias que você pode usar no seu dia a dia.</p>
+                </div>
+
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">5</div>
+                    <h3>Acompanhamento Contínuo</h3>
+                    <p>Progressão personalizada conforme você evolui e se compreende.</p>
+                </div>
+
+                <div class="how-it-works-card">
+                    <div class="how-it-works-number">6</div>
+                    <h3>Seu Tempo</h3>
+                    <p>Sem pressa. Respeitando seu ritmo e suas necessidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ==================== STATS ==================== -->
+    <section class="stats-section" id="sobre">
+        <div class="container">
+            <h2 class="section-title">📊 STATUS DE HABILIDADE 📊</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon">⚡</span>
+                        <h3 class="stat-name">Experiência em Terapia</h3>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 85%"></div>
+                    </div>
+                    <span class="progress-text">85%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon">💚</span>
+                        <h3 class="stat-name">Empatia & Acolhimento</h3>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 100%"></div>
+                    </div>
+                    <span class="progress-text">100%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon">🎯</span>
+                        <h3 class="stat-name">Especialização TCC</h3>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 90%"></div>
+                    </div>
+                    <span class="progress-text">90%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon">🌐</span>
+                        <h3 class="stat-name">Atendimento Online</h3>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 100%"></div>
+                    </div>
+                    <span class="progress-text">100%</span>
+                </div>
+            </div>
+            <div class="stats-highlights">
+                <div class="highlight-card">
+                    <div class="highlight-number" data-count="247">0</div>
+                    <p class="highlight-label">Clientes Transformados</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-number">4.9</div>
+                    <span class="highlight-rating">⭐</span>
+                    <p class="highlight-label">Avaliação Média</p>
+                </div>
+            </div>
+            <div class="about-text">
+                <p>Com mais de 8 anos de experiência em Terapia Cognitivo-Comportamental (TCC), Gislana se dedica a
+                    criar um espaço acolhedor e seguro para transformação pessoal.</p>
+                <p>Seu comprometimento é ajudá-lo a construir uma vida mais plena, resiliente e alinhada com seus
+                    valores mais profundos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ESPECIALIDADES ==================== -->
+    <section class="especialidades-section" id="especialidades">
+        <div class="container">
+            <h2 class="section-title">🎯 MISSÕES DISPONÍVEIS 🎯</h2>
+            <div class="quests-grid">
+                <div class="quest-card">
+                    <div class="quest-icon">⚔️</div>
+                    <h3 class="quest-title">DERROTE A ANSIEDADE</h3>
+                    <ul class="quest-features">
+                        <li><span class="feature-icon">✓</span><span>Técnicas comprovadas de TCC</span></li>
+                        <li><span class="feature-icon">✓</span><span>Respiração e mindfulness</span></li>
+                        <li><span class="feature-icon">✓</span><span>Reforço comportamental</span></li>
+                        <li><span class="feature-icon">✓</span><span>Exposição gradual segura</span></li>
+                    </ul>
+                    <button class="quest-btn">COMEÇAR QUEST</button>
+                </div>
+                <div class="quest-card">
+                    <div class="quest-icon">💪</div>
+                    <h3 class="quest-title">FORTALEÇA SUA ESTIMA</h3>
+                    <ul class="quest-features">
+                        <li><span class="feature-icon">✓</span><span>Autoconhecimento profundo</span></li>
+                        <li><span class="feature-icon">✓</span><span>Reconhecer potenciais</span></li>
+                        <li><span class="feature-icon">✓</span><span>Construir autoconfiança</span></li>
+                        <li><span class="feature-icon">✓</span><span>Desenvolvimento pessoal</span></li>
+                    </ul>
+                    <button class="quest-btn">COMEÇAR QUEST</button>
+                </div>
+                <div class="quest-card">
+                    <div class="quest-icon">🛡️</div>
+                    <h3 class="quest-title">CRIE DEFESAS MENTAIS</h3>
+                    <ul class="quest-features">
+                        <li><span class="feature-icon">✓</span><span>Estratégias de resiliência</span></li>
+                        <li><span class="feature-icon">✓</span><span>Manejo de emoções</span></li>
+                        <li><span class="feature-icon">✓</span><span>Habilidades sociais</span></li>
+                        <li><span class="feature-icon">✓</span><span>Inteligência emocional</span></li>
+                    </ul>
+                    <button class="quest-btn">COMEÇAR QUEST</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INSTAGRAM ==================== -->
+    <section class="instagram-section" id="instagram">
+        <!-- ==================== INSTAGRAM ==================== -->
+        <section class="instagram-section" id="instagram">
+            <div class="container">
+                <h2 class="section-title">📸 DICAS & INSPIRAÇÃO 📸</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" id="prevBtn" aria-label="Anterior">◄</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel" id="carousel">
+                            <!-- POST 1 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/gislana08bits.jpg" alt="Post 1" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">A ansiedade é um convite para olhar para dentro de
+                                            si. Quando respiramos fundo, encontramos força.💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>500</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST 2 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/ig-2.png" alt="Post 2" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">Veja meus posts aqui💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>450</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST 3 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/ig-3.png" alt="Post 3" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">Quando respiramos fundo ao lado de um ombro,
+                                            encontramos força.💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>300</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST 4 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/ig-4.png" alt="Post 4" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">Você é merecedor de amor e cuidado. Especialmente
+                                            do seu próprio amor. Comece hoje! 💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>300</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST 5 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/ig-5.png" alt="Post 5" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">Mindfulness não é escapar do presente, é abraçá-lo
+                                            com gentileza. Pratique hoje! 🧘‍♀️💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>300</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST 6 -->
+                            <div class="carousel-slide">
+                                <div class="instagram-card">
+                                    <img src="./assets/ig-6.png" alt="Post 6" class="instagram-image">
+                                    <div class="instagram-content">
+                                        <p class="instagram-caption">Resiliência é a capacidade de se levantar mais
+                                            forte. Você tem isso em você! 💪💜</p>
+                                        <div class="instagram-meta">
+                                            <span class="instagram-likes"><span>💜</span><span>598</span></span>
+                                            <a href="https://www.instagram.com/psicologalana/" target="_blank"
+                                                class="instagram-link-btn">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" id="nextBtn" aria-label="Próximo">►</button>
+                </div>
+                <div class="carousel-indicators" id="indicators">
+
+                </div>
+                <a href="https://www.instagram.com/psicologalana/" target="_blank" class="instagram-link">
+                    💜 Acompanhe no Instagram para mais dicas
+                </a>
+            </div>
+        </section>
+        <!-- <a href="https://www.instagram.com/psicologalana/" target="_blank" class="instagram-link">
+                💜 Acompanhe no Instagram para mais dicas
+            </a> -->
+        </div>
+    </section>
+
+    <!-- ==================== SEÇÃO: FAQ ==================== -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">❓ Perguntas Frequentes</h2>
+
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h3 class="faq-question">A terapia é presencial?</h3>
+                    <p class="faq-answer">Não. O atendimento é realizado <strong>100% online</strong>, por videochamada.
+                        Você pode fazer de qualquer lugar confortável.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3 class="faq-question">Qual abordagem você utiliza?</h3>
+                    <p class="faq-answer">A <strong>Terapia Cognitivo-Comportamental (TCC)</strong>, que trabalha a
+                        relação entre pensamentos, emoções e comportamentos.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3 class="faq-question">Quanto tempo dura cada sessão?</h3>
+                    <p class="faq-answer">As sessões duram aproximadamente <strong>50 minutos</strong>, em um ambiente
+                        tranquilo e privado.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3 class="faq-question">A terapia online é sigilosa?</h3>
+                    <p class="faq-answer">Sim, com <strong>100% de confidencialidade</strong>. Seu sigilo é protegido
+                        pelo código de ética profissional.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3 class="faq-question">Como faço para agendar?</h3>
+                    <p class="faq-answer">Clique no botão "AGENDAR AGORA" e siga os passos. Você receberá as informações
+                        de horários disponíveis.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3 class="faq-question">Qual é o valor das sessões?</h3>
+                    <p class="faq-answer"><strong>R$ 100</strong> por sessão. Temos também vagas de <strong>consulta
+                            social</strong> em valor promocional para quem não tem condição financeira integral.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMUNIDADE ==================== -->
+    <section class="comunidade-section" id="comunidade">
+        <div class="container">
+            <div class="comunidade-card">
+                <div class="comunidade-header">
+                    <h2 class="comunidade-title">🎮 COMUNIDADE GEEK NO WHATSAPP 🎮</h2>
+                </div>
+                <div class="comunidade-content">
+                    <p class="comunidade-description">
+                        "Anime, games, séries, RPG, tecnologia e conversas legais"
+                    </p>
+                    <div class="comunidade-highlight">
+                        <p>💜 Um espaço leve pra fazer amizades <strong>SEM PRESSÃO</strong></p>
+                    </div>
+                    <div class="comunidade-topics">
+                        <h3>Tópicos da Comunidade:</h3>
+                        <ul>
+                            <li><span class="topic-icon">🎌</span><span>Discussões sobre anime/games</span></li>
+                            <li><span class="topic-icon">💻</span><span>Dicas de tecnologia</span></li>
+                            <li><span class="topic-icon">🤝</span><span>Apoio comunitário saudável</span></li>
+                            <li><span class="topic-icon">🎬</span><span>Recomendações de séries e filmes</span></li>
+                            <li><span class="topic-icon">🎵</span><span>Compartilhamento de músicas</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://chat.whatsapp.com/J62EZoLZJCvLWBfdFCeDbL" target="_blank" class="comunidade-btn">
+                        ▶️ ENTRAR NA COMUNIDADE
+                    </a>
+                    <p class="comunidade-bonus">✨ BONUS: Sorteios exclusivos e eventos especiais para membros!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==================== SEÇÃO: CALL TO ACTION FINAL ==================== -->
+    <section class="final-cta-section">
+        <div class="container">
+            <div class="final-cta-content">
+                <h2 class="final-cta-title">Você não precisa continuar carregando tudo sozinha</h2>
+                <p class="final-cta-text">
+                    Talvez tenha se acostumado a dizer que está tudo bem. Talvez tenha aprendido a ignorar o cansaço e
+                    seguir em frente.<br>
+                    <br>
+                    <strong>Mas existe outro caminho.</strong> Um caminho com escuta, acolhimento, clareza e cuidado
+                    profissional.
+                </p>
+
+                <div class="final-cta-buttons">
+                    <button class="cta-button cta-primary" id="openScheduleBtn3">
+                        💜 AGENDAR ATENDIMENTO AGORA
+                    </button>
+                    <a href="https://www.instagram.com/direct/t/17844047312895467/" target="_blank"
+                        class="cta-button cta-secondary">
+                        💬 FALAR COM A PSICÓLOGA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==================== MODAL DE AGENDAMENTO ==================== -->
+    <div class="schedule-modal" id="scheduleModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeScheduleBtn">✕</button>
+
+            <!-- STEP 1: CALENDÁRIO -->
+            <div class="schedule-step" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title">📅 AGENDE SUA SESSÃO 📅</h2>
+                    <p class="step-subtitle">Escolha uma data e horário disponíveis</p>
+                </div>
+                <div class="schedule-form">
+                    <div class="calendar-section">
+                        <h3 class="form-section-title">Selecione uma Data:</h3>
+                        <div class="calendar-header">
+                            <button class="calendar-nav-btn" id="prevMonth">◄</button>
+                            <h4 class="calendar-month" id="currentMonth">Janeiro 2024</h4>
+                            <button class="calendar-nav-btn" id="nextMonth">►</button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div class="weekday">SEG</div>
+                            <div class="weekday">TER</div>
+                            <div class="weekday">QUA</div>
+                            <div class="weekday">QUI</div>
+                            <div class="weekday">SEX</div>
+                            <div class="weekday disabled">SÁB</div>
+                            <div class="weekday disabled">DOM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/instagram.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/schedule.js"></script>
+<script src="js/validation.js"></script>
+
+</html>

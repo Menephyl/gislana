@@ -1,0 +1,340 @@
+.especialidades-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #0F172A 0%, #1a0f3f 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.especialidades-section::before {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -15%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite;
+    z-index: 0;
+}
+
+.especialidades-section::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite reverse;
+    z-index: 0;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(50px);
+    }
+}
+
+.quests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.quest-card {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(167, 139, 250, 0.06));
+    border: 3px solid var(--primary);
+    padding: 2.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    animation: slideUp 0.6s ease-out;
+    animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.quest-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.quest-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.quest-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.quest-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.quest-card:hover::before {
+    opacity: 1;
+    animation: slideLine 0.6s ease;
+}
+
+@keyframes slideLine {
+    from {
+        left: -100%;
+    }
+
+    to {
+        right: -100%;
+    }
+}
+
+.quest-card:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5),
+        inset 0 0 20px rgba(139, 92, 246, 0.1);
+    transform: translateY(-12px) scale(1.02);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(167, 139, 250, 0.1));
+}
+
+.quest-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.6));
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.quest-card:hover .quest-icon {
+    animation: spin 0.6s ease;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.quest-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+}
+
+.quest-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    flex-grow: 1;
+}
+
+.quest-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    animation: slideInRight 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.quest-features li:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.quest-features li:nth-child(2) {
+    animation-delay: 0.25s;
+}
+
+.quest-features li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.quest-features li:nth-child(4) {
+    animation-delay: 0.35s;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.quest-btn {
+    padding: 0.9rem 1.8rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: var(--white);
+    border: 2px solid var(--white);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.65rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.quest-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.quest-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.quest-btn:hover {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.8),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+}
+
+.quest-btn:active {
+    transform: scale(0.98);
+    animation: pulse 0.3s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .especialidades-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .quests-grid {
+        gap: 2rem;
+        grid-template-columns: 1fr;
+    }
+
+    .quest-card {
+        padding: 2rem;
+    }
+
+    .quest-icon {
+        font-size: 3rem;
+    }
+
+    .quest-title {
+        font-size: 1.1rem;
+    }
+
+    .quest-features li {
+        font-size: 0.9rem;
+    }
+
+    .quest-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .especialidades-section {
+        padding: 3rem 1rem;
+    }
+
+    .quest-card {
+        padding: 1.5rem;
+    }
+
+    .quest-icon {
+        font-size: 2.5rem;
+    }
+
+    .quest-title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .quest-features li {
+        font-size: 0.85rem;
+        gap: 0.6rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .feature-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    .quest-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.55rem;
+    }
+}
