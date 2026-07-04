@@ -707,15 +707,74 @@
                         <button type="button" class="schedule-btn schedule-btn-secondary" id="backStepBtn">
                             ◄ VOLTAR
                         </button>
-                        <button type="submit" class="schedule-btn" id="confirmScheduleBtn" disabled>
+                        <button type="submit" class="schedule-btn" id="confirmScheduleBtn">
                             ✓ CONFIRMAR
                         </button>
                     </div>
                 </form>
             </div>
 
+
             <!-- STEP 3: CONFIRMAÇÃO -->
             <div class="schedule-step" id="step3" style="display: none;">
+                <div class="confirmation-content">
+                    <div class="confirmation-icon">✨</div>
+                    <h2 class="confirmation-title">RESUMO DA SUA SESSÃO</h2>
+                    <p class="confirmation-text">
+                        Confira seus dados antes de enviar para o WhatsApp 📱
+                    </p>
+
+                    <div class="confirmation-details">
+                        <h3>👤 Seus Dados:</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Nome:</span>
+                            <span class="detail-value" id="confirmName">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value" id="confirmEmail">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">WhatsApp:</span>
+                            <span class="detail-value" id="confirmWhatsapp">-</span>
+                        </div>
+
+                        <h3 style="margin-top: 20px;">📅 Data & Horário:</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Data:</span>
+                            <span class="detail-value" id="confirmDate">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Horário:</span>
+                            <span class="detail-value" id="confirmTime">-</span>
+                        </div>
+
+                        <h3 style="margin-top: 20px;">🎯 O que você vai trabalhar:</h3>
+                        <div class="detail-item">
+                            <span class="detail-value" id="confirmDescription"
+                                style="text-align: left; font-size: 14px; line-height: 1.6;">-</span>
+                        </div>
+                    </div>
+
+                    <div class="confirmation-next-steps">
+                        <p style="color: #a855f7; font-size: 14px; margin-bottom: 20px;">
+                            ✓ Ao clicar em "ENVIAR", uma mensagem será aberta no WhatsApp com todos esses dados.
+                            <br><br>
+                            💜 Você só precisa revisar e clicar em ENVIAR.
+                        </p>
+                    </div>
+
+                    <div class="schedule-actions schedule-actions-double">
+                        <button type="button" class="schedule-btn schedule-btn-secondary" id="backStepBtn2">
+                            ◄ VOLTAR E EDITAR
+                        </button>
+                        <button class="schedule-btn" id="whatsappBtn">
+                            💬 ENVIAR VIA WHATSAPP
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="schedule-step" id="step3" style="display: none;">
                 <div class="confirmation-content">
                     <div class="confirmation-icon">✨</div>
                     <h2 class="confirmation-title">SUA JORNADA COMEÇOU!</h2>
@@ -767,10 +826,22 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
-
+    <script>
+        // Adiciona listener para botão "Voltar e Editar" no Step 3
+        document.addEventListener('DOMContentLoaded', () => {
+            const backBtn2 = document.getElementById('backStepBtn2');
+            if (backBtn2) {
+                backBtn2.addEventListener('click', () => {
+                    document.getElementById('step3').style.display = 'none';
+                    document.getElementById('step2').style.display = 'block';
+                    document.querySelector('.modal-content').scrollTop = 0;
+                });
+            }
+        });
+    </script>
     <!-- ==================== SCRIPTS ==================== -->
     <script src="js/instagram.js"></script>
     <script src="js/animations.js"></script>

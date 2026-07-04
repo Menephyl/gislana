@@ -14,7 +14,6 @@ class ScheduleManager {
         this.backStepBtn = document.getElementById('backStepBtn');
         this.confirmScheduleBtn = document.getElementById('confirmScheduleBtn');
         this.closeConfirmationBtn = document.getElementById('closeConfirmationBtn');
-        this.closeSuccessBtn = document.getElementById('closeSuccessBtn');
 
         // Calendar elements
         this.calendarDays = document.getElementById('calendarDays');
@@ -31,14 +30,9 @@ class ScheduleManager {
         this.step1 = document.getElementById('step1');
         this.step2 = document.getElementById('step2');
         this.step3 = document.getElementById('step3');
-        this.step4 = document.getElementById('step4');
 
         // Form
         this.scheduleForm = document.getElementById('scheduleForm');
-
-        // PIX elements
-        this.copyPixBtn = document.getElementById('copyPixBtn');
-        this.whatsappLink = document.getElementById('whatsappLink');
 
         // Data state
         this.currentDate = new Date();
@@ -46,7 +40,10 @@ class ScheduleManager {
         this.selectedTime = null;
         this.formData = {};
 
-        // Horários ocupados (simulado - em produção vem do backend)
+        // Número WhatsApp da Gislana
+        this.whatsappNumber = '553291640120';
+
+        // Horários ocupados (simulado)
         this.bookedSlots = [
             '2024-01-15-09:00',
             '2024-01-15-14:00',
@@ -61,27 +58,76 @@ class ScheduleManager {
     init() {
         console.log('✓ ScheduleManager inicializado');
 
-        // Event listeners - Modal
-        this.openScheduleBtns.forEach(btn => {
-            btn.addEventListener('click', () => this.openModal());
-        });
+        // ==================== EVENT LISTENERS - MODAL ====================
+        if (this.openScheduleBtns && this.openScheduleBtns.length > 0) {
+            this.openScheduleBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.openModal();
+                });
+            });
+        }
 
-        this.closeBtn.addEventListener('click', () => this.closeModal());
-        this.modalOverlay.addEventListener('click', () => this.closeModal());
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.closeModal());
+        }
 
-        // Event listeners - Calendar
-        this.prevMonthBtn.addEventListener('click', () => this.previousMonth());
-        this.nextMonthBtn.addEventListener('click', () => this.nextMonth());
+        if (this.modalOverlay) {
+            this.modalOverlay.addEventListener('click', () => this.closeModal());
+        }
 
-        // Event listeners - Navigation
-        this.nextStepBtn.addEventListener('click', () => this.goToStep2());
-        this.backStepBtn.addEventListener('click', () => this.goToStep1());
-        this.closeConfirmationBtn.addEventListener('click', () => this.closeModal());
-        this.closeSuccessBtn?.addEventListener('click', () => this.closeModal());
+        // ==================== EVENT LISTENERS - CALENDAR ====================
+        if (this.prevMonthBtn) {
+            this.prevMonthBtn.addEventListener('click', () => this.previousMonth());
+        }
 
-        // Event listeners - PIX
-        this.copyPixBtn?.addEventListener('click', () => this.copyPixKey());
-        this.whatsappLink?.addEventListener('click', () => this.handleWhatsappClick());
+        if (this.nextMonthBtn) {
+            this.nextMonthBtn.addEventListener('click', () => this.nextMonth());
+        }
+
+        // ==================== EVENT LISTENERS - NAVIGATION ====================
+        if (this.nextStepBtn) {
+            this.nextStepBtn.addEventListener('click', () => this.goToStep2());
+        }
+
+        if (this.backStepBtn) {
+            this.backStepBtn.addEventListener('click', () => this.goToStep1());
+        }
+
+        if (this.closeConfirmationBtn) {
+            this.closeConfirmationBtn.addEventListener('click', () => this.closeModal());
+        }
+
+        // ==================== EVENT LISTENERS - FORM ====================
+        if (this.scheduleForm) {
+            this.scheduleForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        }
+
+        // Counter de caracteres
+        const descriptionTextarea = document.getElementById('userDescription');
+        if (descriptionTextarea) {
+            descriptionTextarea.addEventListener('input', () => {
+                const charCount = document.getElementById('charCount');
+                if (charCount) {
+                    charCount.textContent = descriptionTextarea.value.length;
+                }
+            });
+        }
+
+        // ==================== EVENT LISTENERS - WHATSAPP ====================
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', () => this.sendWhatsappMessage());
+        }
+
+        // Botão voltar no step 3
+        const backBtn2 = document.getElementById('backStepBtn2');
+        if (backBtn2) {
+            backBtn2.addEventListener('click', () => {
+                if (this.step3) this.step3.style.display = 'none';
+                if (this.step2) this.step2.style.display = 'block';
+            });
+        }
 
         // Previne fechar ao clicar na modal
         const modalContent = document.querySelector('.modal-content');
@@ -97,13 +143,15 @@ class ScheduleManager {
 
     // ==================== MODAL ====================
     openModal() {
-        this.modal.classList.add('active');
+        if (!this.modal) return;
+        this.modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
         this.resetModal();
     }
 
     closeModal() {
-        this.modal.classList.remove('active');
+        if (!this.modal) return;
+        this.modal.style.display = 'none';
         document.body.style.overflow = 'auto';
         this.resetModal();
     }
@@ -114,34 +162,37 @@ class ScheduleManager {
         this.selectedTime = null;
         this.formData = {};
 
-        this.step1.style.display = 'block';
-        this.step2.style.display = 'none';
-        this.step3.style.display = 'none';
-        if (this.step4) {
-            this.step4.style.display = 'none';
-        }
+        if (this.step1) this.step1.style.display = 'block';
+        if (this.step2) this.step2.style.display = 'none';
+        if (this.step3) this.step3.style.display = 'none';
 
-        this.timesSection.style.display = 'none';
-        this.nextStepBtn.disabled = true;
+        if (this.timesSection) this.timesSection.style.display = 'none';
+        if (this.nextStepBtn) this.nextStepBtn.disabled = true;
 
         this.renderCalendar();
-        this.scheduleForm.reset();
+
+        if (this.scheduleForm) this.scheduleForm.reset();
     }
 
     // ==================== CALENDÁRIO ====================
     renderCalendar() {
+        if (!this.calendarDays) return;
+
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
 
         // Atualiza título do mês
         const monthName = this.getMonthName(month);
-        this.currentMonthDisplay.textContent = `${monthName} ${year}`;
+        if (this.currentMonthDisplay) {
+            this.currentMonthDisplay.textContent = `${monthName} ${year}`;
+        }
 
         // Limpa dias anteriores
         this.calendarDays.innerHTML = '';
 
         // Primeiro dia do mês
         const firstDay = new Date(year, month, 1).getDay();
+
         // Número de dias no mês
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -160,7 +211,6 @@ class ScheduleManager {
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(year, month, day);
             const dateString = this.formatDate(date);
-
             const dayBtn = document.createElement('button');
             dayBtn.className = 'calendar-day';
             dayBtn.textContent = day;
@@ -179,8 +229,10 @@ class ScheduleManager {
             } else {
                 dayBtn.classList.add('available');
                 dayBtn.dataset.date = dateString;
-
-                dayBtn.addEventListener('click', () => this.selectDate(dateString, day, month, year));
+                dayBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.selectDate(dateString, day, month, year);
+                });
             }
 
             this.calendarDays.appendChild(dayBtn);
@@ -194,24 +246,33 @@ class ScheduleManager {
         });
 
         // Marca novo selecionado
-        event.target.classList.add('selected');
+        document.querySelector(`[data-date="${dateString}"]`)?.classList.add('selected');
 
         this.selectedDate = dateString;
-        this.selectedTime = null; // Reset tempo quando muda data
+        this.selectedTime = null;
 
         // Renderiza horários para essa data
         this.renderTimes(dateString, day, month, year);
 
         // Mostra seção de horários
-        this.timesSection.style.display = 'block';
-        this.nextStepBtn.disabled = true; // Desabilita até escolher hora
+        if (this.timesSection) {
+            this.timesSection.style.display = 'block';
+        }
+
+        if (this.nextStepBtn) {
+            this.nextStepBtn.disabled = true;
+        }
     }
 
     renderTimes(dateString, day, month, year) {
+        if (!this.timesGrid) return;
+
         const monthName = this.getMonthName(month);
         const dayName = this.getDayName(new Date(year, month, day).getDay());
 
-        this.selectedDateDisplay.textContent = `${dayName}, ${day} de ${monthName}`;
+        if (this.selectedDateDisplay) {
+            this.selectedDateDisplay.textContent = `${dayName}, ${day} de ${monthName}`;
+        }
 
         this.timesGrid.innerHTML = '';
 
@@ -221,7 +282,6 @@ class ScheduleManager {
         hours.forEach(hour => {
             const timeString = `${String(hour).padStart(2, '0')}:00`;
             const slotId = `${dateString}-${timeString}`;
-
             const timeBtn = document.createElement('button');
             timeBtn.className = 'time-slot';
             timeBtn.textContent = `${hour}h`;
@@ -235,7 +295,10 @@ class ScheduleManager {
                 timeBtn.classList.add('booked');
                 timeBtn.disabled = true;
             } else {
-                timeBtn.addEventListener('click', () => this.selectTime(timeString, timeBtn));
+                timeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.selectTime(timeString, timeBtn);
+                });
             }
 
             this.timesGrid.appendChild(timeBtn);
@@ -253,7 +316,9 @@ class ScheduleManager {
         this.selectedTime = timeString;
 
         // Habilita botão "PRÓXIMO"
-        this.nextStepBtn.disabled = false;
+        if (this.nextStepBtn) {
+            this.nextStepBtn.disabled = false;
+        }
 
         // Atualiza resumo
         this.updateSummary();
@@ -276,40 +341,24 @@ class ScheduleManager {
             return;
         }
 
-        this.step1.style.display = 'none';
-        this.step2.style.display = 'block';
+        if (this.step1) this.step1.style.display = 'none';
+        if (this.step2) this.step2.style.display = 'block';
 
         this.updateSummary();
     }
 
     goToStep1() {
-        this.step2.style.display = 'none';
-        this.step1.style.display = 'block';
+        if (this.step2) this.step2.style.display = 'none';
+        if (this.step1) this.step1.style.display = 'block';
     }
 
     goToStep3() {
-        this.step1.style.display = 'none';
-        this.step2.style.display = 'none';
-        this.step3.style.display = 'block';
-        if (this.step4) {
-            this.step4.style.display = 'none';
-        }
+        if (this.step1) this.step1.style.display = 'none';
+        if (this.step2) this.step2.style.display = 'none';
+        if (this.step3) this.step3.style.display = 'block';
 
         // Preenche dados de confirmação
         this.populateConfirmation();
-
-        // Gera URL do WhatsApp com mensagem preenchida
-        this.generateWhatsappMessage();
-    }
-
-    goToStep4() {
-        this.step1.style.display = 'none';
-        this.step2.style.display = 'none';
-        this.step3.style.display = 'none';
-
-        if (this.step4) {
-            this.step4.style.display = 'block';
-        }
     }
 
     // ==================== ATUALIZA RESUMO ====================
@@ -319,106 +368,202 @@ class ScheduleManager {
             const monthName = this.getMonthName(month - 1);
             const dayName = this.getDayName(new Date(year, month - 1, day).getDay());
 
-            document.getElementById('summaryDate').textContent = `${dayName}, ${day} de ${monthName}`;
-            document.getElementById('summaryTime').textContent = this.selectedTime;
+            const summaryDate = document.getElementById('summaryDate');
+            const summaryTime = document.getElementById('summaryTime');
+
+            if (summaryDate) {
+                summaryDate.textContent = `${dayName}, ${day} de ${monthName}`;
+            }
+
+            if (summaryTime) {
+                summaryTime.textContent = this.selectedTime;
+            }
         }
+    }
+
+    // ==================== VALIDAÇÃO E SUBMISSÃO DO FORMULÁRIO ====================
+    handleFormSubmit(e) {
+        e.preventDefault();
+
+        // Coleta dados do formulário
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userWhatsapp = document.getElementById('userWhatsapp');
+        const userDescription = document.getElementById('userDescription');
+
+        if (!userName || !userEmail || !userWhatsapp || !userDescription) {
+            alert('Erro: Campos do formulário não encontrados');
+            return;
+        }
+
+        const name = userName.value.trim();
+        const email = userEmail.value.trim();
+        const whatsapp = userWhatsapp.value.trim();
+        const description = userDescription.value.trim();
+
+        // Validação básica
+        if (!name || name.length < 3) {
+            alert('Por favor, digite seu nome completo (mínimo 3 caracteres)');
+            userName.focus();
+            return;
+        }
+
+        if (!email || !this.isValidEmail(email)) {
+            alert('Por favor, digite um email válido');
+            userEmail.focus();
+            return;
+        }
+
+        if (!whatsapp || whatsapp.length < 10) {
+            alert('Por favor, digite um WhatsApp válido com DDD');
+            userWhatsapp.focus();
+            return;
+        }
+
+        if (!description || description.length < 10) {
+            alert('Por favor, descreva o que deseja trabalhar (mínimo 10 caracteres)');
+            userDescription.focus();
+            return;
+        }
+
+        // Salva dados
+        this.formData = {
+            name,
+            email,
+            whatsapp,
+            description,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log('✓ Formulário validado:', this.formData);
+
+        // Vai para Step 3 (Confirmação)
+        this.goToStep3();
+    }
+
+    // ==================== VALIDAÇÕES ====================
+    isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
     // ==================== CONFIRMAÇÃO ====================
     populateConfirmation() {
+        if (!this.selectedDate) return;
+
         const [year, month, day] = this.selectedDate.split('-').map(Number);
         const monthName = this.getMonthName(month - 1);
         const dayName = this.getDayName(new Date(year, month - 1, day).getDay());
 
-        document.getElementById('confirmName').textContent = this.formData.name || '-';
-        document.getElementById('confirmEmail').textContent = this.formData.email || '-';
-        document.getElementById('confirmWhatsapp').textContent = this.formData.whatsapp || '-';
-        document.getElementById('confirmDate').textContent = `${dayName}, ${day} de ${monthName}`;
-        document.getElementById('confirmTime').textContent = this.selectedTime || '-';
+        // Preenche dados pessoais
+        const confirmName = document.getElementById('confirmName');
+        const confirmEmail = document.getElementById('confirmEmail');
+        const confirmWhatsapp = document.getElementById('confirmWhatsapp');
+        const confirmDate = document.getElementById('confirmDate');
+        const confirmTime = document.getElementById('confirmTime');
+        const confirmDescription = document.getElementById('confirmDescription');
+
+        if (confirmName) confirmName.textContent = this.formData.name || '-';
+        if (confirmEmail) confirmEmail.textContent = this.formData.email || '-';
+        if (confirmWhatsapp) confirmWhatsapp.textContent = this.formData.whatsapp || '-';
+        if (confirmDate) confirmDate.textContent = `${dayName}, ${day} de ${monthName}`;
+        if (confirmTime) confirmTime.textContent = this.selectedTime || '-';
+        if (confirmDescription) confirmDescription.textContent = this.formData.description || '-';
+
+        console.log('✓ Confirmação populada com dados');
     }
 
-    // ==================== GERA MENSAGEM WHATSAPP ====================
-    generateWhatsappMessage() {
-        const name = this.formData.name || '[Nome não preenchido]';
-        const email = this.formData.email || '[Email não preenchido]';
-        const whatsapp = this.formData.whatsapp || '[WhatsApp não preenchido]';
-        const description = this.formData.description || '[Descrição não preenchida]';
+    // ==================== GERA E ENVIA MENSAGEM WHATSAPP ====================
+    sendWhatsappMessage() {
+        if (!this.selectedDate || !this.selectedTime) {
+            alert('Erro: Data ou horário não selecionados');
+            return;
+        }
 
         const [year, month, day] = this.selectedDate.split('-').map(Number);
         const monthName = this.getMonthName(month - 1);
         const dayName = this.getDayName(new Date(year, month - 1, day).getDay());
         const dateFormatted = `${dayName}, ${day} de ${monthName}`;
-
         const time = this.selectedTime;
 
-        // Mensagem formatada
-        const messageText = `Olá Gislana! 💜
+        // Formata o WhatsApp (remove caracteres especiais)
+        const whatsappFormatted = this.formData.whatsapp.replace(/\D/g, '');
 
-Realizei o pagamento do PIX e gostaria de confirmar meu agendamento.
+        // Mensagem formatada para WhatsApp
+        const messageText = `🟣 *CONFIRMAÇÃO DE AGENDAMENTO* 🟣
 
-*Meus dados:*
-👤 Nome: ${name}
-📧 Email: ${email}
-📱 WhatsApp: ${whatsapp}
+Olá Gislana! 💜
 
-*Horário da sessão:*
-📅 Data: ${dateFormatted}
-🕐 Horário: ${time}
 
-*Descrição do que vou trabalhar:*
-${description}
+Vim pelo site para confirmar meu agendamento de sessão.
 
-Aguardo a confirmação! 🙏`;
+*👤 DADOS PESSOAIS:*
+Nome: ${this.formData.name}
+Email: ${this.formData.email}
+WhatsApp: ${this.formData.whatsapp}
 
-        // Encoda a mensagem para URL
+*📅 HORÁRIO DA SESSÃO:*
+Data: ${dateFormatted}
+Horário: ${time}h
+
+*🎯 O QUE VOU TRABALHAR:*
+${this.formData.description}
+
+*💰 SOBRE O ORÇAMENTO:*
+Qual é o valor da sessão? Você oferece opções de pagamento ou consulta social?
+
+Aguardo sua confirmação! 🙏💜`;
+
+        // Encoda a mensagem para URL (preserva quebras de linha)
         const encodedMessage = encodeURIComponent(messageText);
 
-        // Número de WhatsApp da Gislana (SUBSTITUA PELO NÚMERO REAL)
-        // Formato: 55 + DDD + número (sem formatação)
-        const whatsappNumber = '5511987654321'; // ALTERAR PARA O NÚMERO REAL
-
-        // Gera URL do WhatsApp
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-        // Atualiza o link do botão
-        if (this.whatsappLink) {
-            this.whatsappLink.href = whatsappUrl;
-        }
+        // URL do WhatsApp
+        const whatsappUrl = `https://wa.me/${this.whatsappNumber}?text=${encodedMessage}`;
 
         console.log('✓ Mensagem WhatsApp gerada');
-    }
-    // ==================== COPIAR CHAVE PIX ====================
-    copyPixKey() {
-        const pixKey = document.getElementById('pixKey').textContent;
+        console.log('📱 Enviando para:', this.whatsappNumber);
+        console.log('📝 Mensagem:', messageText);
 
-        navigator.clipboard.writeText(pixKey).then(() => {
-            // Feedback visual
-            const btn = this.copyPixBtn;
-            const originalText = btn.textContent;
+        // Abre WhatsApp em nova aba
+        window.open(whatsappUrl, '_blank');
 
-            btn.classList.add('copied');
-            btn.textContent = '✓';
+        // Mostra mensagem de sucesso
+        this.showSuccessMessage();
 
-            setTimeout(() => {
-                btn.classList.remove('copied');
-                btn.textContent = originalText;
-            }, 2000);
-
-            console.log('✓ Chave PIX copiada:', pixKey);
-        }).catch(err => {
-            console.error('Erro ao copiar:', err);
-            alert('Erro ao copiar chave PIX');
-        });
-    }
-
-    // ==================== HANDLE WHATSAPP CLICK ====================
-    handleWhatsappClick() {
-        console.log('✓ Mensagem enviada via WhatsApp');
-
-        // Aguarda um pouco e mostra a tela de sucesso
+        // Fecha o modal após 2 segundos
         setTimeout(() => {
-            this.goToStep4();
-        }, 500);
+            this.closeModal();
+        }, 2000);
+    }
+
+    // ==================== MENSAGEM DE SUCESSO ====================
+    showSuccessMessage() {
+        // Cria um overlay de sucesso temporário
+        const successOverlay = document.createElement('div');
+        successOverlay.className = 'success-message';
+        successOverlay.innerHTML = `
+            <div class="success-content">
+                <div class="success-icon">✨</div>
+                <h3>Mensagem Enviada!</h3>
+                <p>Sua solicitação foi enviada para o WhatsApp da Gislana 💜</p>
+                <p class="success-subtitle">Aguarde a confirmação. Você será contatada em breve!</p>
+            </div>
+        `;
+
+        document.body.appendChild(successOverlay);
+
+        // Anima entrada
+        setTimeout(() => {
+            successOverlay.classList.add('show');
+        }, 100);
+
+        // Remove após 3 segundos
+        setTimeout(() => {
+            successOverlay.classList.remove('show');
+            setTimeout(() => {
+                successOverlay.remove();
+            }, 300);
+        }, 3000);
     }
 
     // ==================== UTILS ====================
@@ -458,12 +603,6 @@ Aguardo a confirmação! 🙏`;
             'Sábado'
         ];
         return days[dayIndex];
-    }
-
-    // ==================== SALVA DADOS DO FORMULÁRIO ====================
-    saveFormData(data) {
-        this.formData = data;
-        console.log('✓ Dados do formulário salvos:', data);
     }
 
     // ==================== RETORNA DADOS PARA ENVIAR AO SERVIDOR ====================
