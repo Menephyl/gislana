@@ -1,0 +1,104 @@
+/* ==================== GLOBAL RESPONSIVE FIXES ==================== */
+/* Garante que nenhum elemento quebre o layout em telas muito pequenas (ex: Samsung A01 - 320px/360px) */
+
+@media (max-width: 480px) {
+    /* Força os elementos com largura fixa a se adaptarem à tela */
+    .hero-content, 
+    .stat-box, 
+    .especialidade-card, 
+    .insta-card, 
+    .comunidade-card, 
+    .modal-content, 
+    .success-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+
+    body, section {
+        overflow-x: hidden;
+    }
+
+    /* Reduz paddings para não apertar o conteúdo no Modal */
+    .modal-content {
+        padding: 1.5rem !important;
+        margin: 10px !important;
+        width: calc(100% - 20px) !important;
+    }
+
+    /* Ajuste nos elementos criados via JS (Calendário e Horários) */
+    .calendar-days div, 
+    .calendar-weekdays div,
+    .calendar-day {
+        font-size: 0.7rem !important;
+        padding: 0.4rem 0.2rem !important;
+    }
+
+    .time-slot {
+        font-size: 0.7rem !important;
+        padding: 0.6rem 0.2rem !important;
+    }
+
+    .schedule-btn {
+        padding: 0.8rem 1rem !important;
+        font-size: 0.7rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .schedule-actions,
+    .schedule-actions-double {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    h1, .hero-title {
+        font-size: 1.5rem !important;
+    }
+
+    h2 {
+        font-size: 1.2rem !important;
+    }
+    
+    /* Ajustes específicos para navbar no mobile */
+    .navbar-container {
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .logo-text {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Ajustes extras para telas extremamente pequenas (Samsung A01, iPhone SE) */
+    .time-slot {
+        font-size: 0.6rem !important;
+        padding: 0.5rem 0.1rem !important;
+    }
+    
+    .calendar-days div, 
+    .calendar-weekdays div,
+    .calendar-day {
+        font-size: 0.6rem !important;
+        padding: 0.3rem 0.1rem !important;
+    }
+    
+    .schedule-btn {
+        font-size: 0.6rem !important;
+    }
+    
+    .form-input, .form-textarea {
+        font-size: 0.9rem !important;
+        padding: 0.6rem !important;
+    }
+    
+    .success-content {
+        padding: 20px !important;
+    }
+    
+    h1, .hero-title {
+        font-size: 1.2rem !important;
+    }
+}
